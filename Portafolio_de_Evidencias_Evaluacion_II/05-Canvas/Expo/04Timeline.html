@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reto Canvas: Animación Fluida</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h2>Motor de Partículas</h2>
+    <p>Convierte esta partícula solitaria en un enjambre usando un Arreglo (Array).</p>
+    
+    <canvas id="lienzo" width="800" height="500"></canvas>
+
+    <script>
+        const canvas = document.getElementById('lienzo');
+        const ctx = canvas.getContext('2d');
+
+        // ==========================================
+        // LA PARTÍCULA SOLITARIA (Datos)
+        // ==========================================
+        let posX = 100;
+        let posY = 250;
+        let velocidadX = 4; // Se mueve 4 pixeles a la derecha por frame
+        let velocidadY = 3; // Se mueve 3 pixeles hacia abajo por frame
+        let radio = 20;
+
+        let variaciones = [
+            { velX: 4, velY: 3, radio: 20, color: "#00ffff" },
+            { velX: -3, velY: 2, radio: 15, color: "#ff4d6d" },
+            { velX: 2, velY: -4, radio: 25, color: "#ffd166" },
+            { velX: 5, velY: 1, radio: 12, color: "#80ed99" },
+            { velX: -4, velY: -3, radio: 18, color: "#c77dff" }
+        ];
+
+        let particulas = [];
+
+        for (let i = 0; i < 50; i++) {
+            let v = variaciones[Math.floor(Math.random() * variaciones.length)];
+            particulas.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                velX: Math.random() * 50,
+                velY: Math.random() * 20,
+                radio: Math.random() * 10,
+                color: v.color
+            });
+        }
+
+        // ==========================================
+        // EL DIRECTOR DE CÁMARA (El Bucle de Animación)
+        // ==========================================
+        function animar() {
+            
+            // PASO 1: BORRAR EL PIZARRÓN (Si quitan esto, la pelota dejará un rastro)
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // PASO 2: DIBUJAR LA ESCENA
+            particulas.forEach(particula => {
+                ctx.beginPath();
+                ctx.arc(particula.x, particula.y, particula.radio, 0, Math.PI * 2);
+                ctx.fillStyle = particula.color;
+                ctx.fill();
+            });
+
+            // PASO 3: ACTUALIZAR LA LÓGICA (Mover para el siguiente cuadro)
+            particulas.forEach(particula => {
+                particula.x = particula.x + particula.velX;
+                particula.y = particula.y + particula.velY;
+            });
+
+            // FÍSICA BÁSICA: El Rebote (Si toca los bordes, invierte su velocidad)
+            particulas.forEach(particula => {
+                if (particula.x + particula.radio > canvas.width || particula.x - particula.radio < 0) {
+                    particula.velX = particula.velX * -1; 
+                }
+                if (particula.y + particula.radio > canvas.height || particula.y - particula.radio < 0) {
+                    particula.velY = particula.velY * -1;
+                }
+            });
+
+            // PASO 4: PEDIR EL SIGUIENTE CUADRO AL NAVEGADOR (Magia pura)
+            // Esto le dice al navegador: "En cuanto estés listo para pintar otra vez, vuelve a llamar a esta función"
+            requestAnimationFrame(animar);
+        }
+
+        // ¡Acción! Iniciamos la película
+        animar();
+
+    </script>
+</body>
+</html>
