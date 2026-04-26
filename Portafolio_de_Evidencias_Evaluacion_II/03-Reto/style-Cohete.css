@@ -1,0 +1,78 @@
+body{
+    background-color: #010128;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+.contenedor{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+button{
+    width: 200px;
+    height: 50px;
+    border-radius: 50px;
+    justify-content: center;
+    border: none;
+    align-items: center;
+    background-color: red;
+    z-index: 2;
+}
+
+
+button:hover{
+    background-color: rgb(253, 82, 82);
+    transform: scale(1.1);
+}
+
+
+.Lanzamiento-Click button{
+    background-color: #00a703;
+}
+
+
+@keyframes flotar{
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+
+.Cohete{
+    align-items: center;
+    justify-content: center;
+    font-size: 70px;
+    animation: flotar 3s ease-in-out infinite;
+    position: absolute;
+    z-index: 1;
+}
+
+
+
+@keyframes volar{
+    0% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-1000px);
+    }
+}
+
+
+.Lanzamiento-Click .Cohete{
+    animation: volar 2s ease-in forwards;
+}

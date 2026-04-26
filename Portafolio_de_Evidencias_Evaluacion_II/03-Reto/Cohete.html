@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style-Cohete.css">
+    <title>Lanzamiento del Cohete</title>
+
+</head>
+
+<body>
+
+    <div class="contenedor">
+        <button id="btn-Lanzar" onclick="btn_Lanzar()">🚀Lanzar Proyecto</button>
+        <div class="Cohete">
+        <p>🚀</p>
+        </div> 
+    </div>
+   
+       
+  
+
+ <script>
+        function btn_Lanzar() {
+            //Atrapamos a los actores
+            let cuerpo = document.body;
+            let boton = document.getElementById("btn-Lanzar");
+
+            //Ejecutamos la clase que detona la animacion CSS
+            cuerpo.classList.toggle("Lanzamiento-Click");
+
+            //Condicional lógico para cambiar el texto
+            if(cuerpo.classList.contains("Lanzamiento-Click")){
+                boton.innerHTML = "✅ Lanzamiento";
+            }else{
+                boton.innerHTML = "🚀Lanzar Proyecto";
+            }
+        }
+ </script>
+
+</body>
+</html>
+
+
