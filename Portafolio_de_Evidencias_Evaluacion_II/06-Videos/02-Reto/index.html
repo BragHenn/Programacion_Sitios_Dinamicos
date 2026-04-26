@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Reto: Reproductor Premium</title>
+</head>
+<body>
+ 
+ 
+    <div class="contenedor-video">
+        
+        <video id="cine" src="https://www.w3schools.com/html/mov_bbb.mp4" loop></video>
+        
+        <div class="controles-ui">
+            <button onclick="accionPlay()">▶️</button>
+            <button onclick="accionPausa()">⏸️</button>
+            <button id="speaker" onclick="accionMute()">🔊</button>
+            <button id="Modo_Cine" onclick="modoCine()">🎬</button>
+
+            </div>
+
+
+    </div>
+ 
+ 
+    <script>
+        // 1. Atrapamos el video
+        const miVideo = document.getElementById("cine");
+ 
+ 
+        // 2. Funciones de la API Multimedia
+        function accionPlay() {
+            miVideo.play();
+        }
+ 
+ 
+        function accionPausa() {
+            miVideo.pause();
+        }
+ 
+ 
+        function accionMute() {
+            // El atributo muted es un Booleano (true/false)
+            // Si está true, lo volvemos false, y viceversa.
+            // 👇 RETO 3: Cambia el ícono de mute a unmute y viceversa
+
+            //Atrapamos a los actores
+            let cuerpo = document.body;
+            let boton = document.getElementById("speaker");
+
+            //Ejecutamos la clase que detona la animacion CSS
+            cuerpo.classList.toggle("Cambiar_Modo");
+
+            //Condicional lógico para cambiar el texto
+            if(cuerpo.classList.contains("Cambiar_Modo") && miVideo.muted === false){
+                boton.innerHTML = "🔇";
+                miVideo.muted = true;
+            }else{
+                boton.innerHTML = "🔊";
+                miVideo.muted = false
+            }
+
+        }
+ 
+ 
+        // 👇 RETO 4: Crea aquí la función para el "Modo Cine" usando document.body.classList.toggle
+        
+        function modoCine(){
+        let cuerpo = document.body;
+        let boton = document.getElementById("Modo_Cine");
+
+        cuerpo.classList.toggle("luces-apagadas");
+
+        if(cuerpo.classList.contains("luces-apagadas")){
+            boton.innerHTML = "✨";
+        }else{
+            boton.innerHTML = "🎬";
+        }
+
+        }
+
+
+    </script>
+</body>
+</html>

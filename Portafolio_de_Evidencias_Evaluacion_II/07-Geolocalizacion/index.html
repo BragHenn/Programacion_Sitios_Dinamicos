@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radar de Espionaje Táctico</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="radar-container">
+        <div class="card" id="radarCard">
+            <div class="led" id="statusLed"></div>
+            
+            <header>
+                <h2>SISTEMA DE RASTREO</h2>
+                <p class="id-tag">ID: AGENTE_007</p>
+            </header>
+
+            <div class="display-area">
+                <div class="data-row">
+                    <span class="label">LATITUD</span>
+                    <div id="lat">00.000000</div>
+                </div>
+                <div class="data-row">
+                    <span class="label">LONGITUD</span>
+                    <div id="lng">00.000000</div>
+                </div>
+            </div>
+
+            <div id="status-text" class="status-msg">ESPERANDO SEÑAL...</div>
+
+            <button id="btnTrack">INTERCEPTAR UBICACIÓN</button>
+        </div>
+    </div>
+
+    <script>
+
+        const btn = document.getElementById('btnTrack');
+const latDisplay = document.getElementById('lat');
+const lngDisplay = document.getElementById('lng');
+const statusText = document.getElementById('status-text');
+const led = document.getElementById('statusLed');
+
+btn.addEventListener('click', () => {
+    if (!navigator.geolocation) {
+        statusText.innerHTML = "EL NAVEGADOR NO SOPORTA GPS.";
+        return;
+    }
+
+    statusText.innerText = "SOLICITANDO PERMISOS...";
+    navigator.geolocation.getCurrentPosition(success, error);
+});
+
+function success(position) {
+    const lat = position.coords.latitude;
+    const lng = position.coords.longitude;
+
+    latDisplay.innerText = lat.toFixed(6);
+    lngDisplay.innerText = lng.toFixed(6);
+    
+    statusText.innerText = "CONEXIÓN ESTABLECIDA: AGENTE LOCALIZADO";
+    statusText.classList.remove('error-text');
+    led.className = "led led-active";
+    btn.innerText = "ACTUALIZAR RASTREO";
+}
+
+function error(err) {
+    led.className = "led led-error";
+    
+    if (err.code === 1) {
+        statusText.innerHTML = '<span class="error-text">PERMISO DENEGADO. ESTÁS FUERA DEL RADAR.</span>';
+    } else {
+        statusText.innerText = "ERROR DE SEÑAL SATELITAL. AGENTE NO LOCALIZADO";
+    }
+
+    latDisplay.innerText = "00.000000";
+    lngDisplay.innerText = "00.000000";
+}
+
+    </script>
+</body>
+</html>

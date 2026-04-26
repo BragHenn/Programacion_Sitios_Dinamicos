@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://use.typekit.net/umi6ltv.css">
+    <link rel="stylesheet" href="mood_style.css">
+    <title>Inspiración Asíncrona</title>
+</head>
+<body>
+ 
+ 
+    <div id="frase-contenedor">
+        <h1 id="texto-frase">"Haz clic para encontrar inspiración"</h1>
+        <p id="autor-frase"></p>
+    </div>
+ 
+ 
+    <button id="btn-inspirar" onclick="obtenerFrase()">✨ Dame una frase</button>
+ 
+ 
+    <script>
+        function obtenerFrase() {
+            const boton = document.getElementById("btn-inspirar");
+            const texto = document.getElementById("texto-frase");
+            const autor = document.getElementById("autor-frase");
+            
+            
+            // UX: Desactivar botón mientras esperamos
+            boton.innerHTML = "Buscando inspiración...";
+            boton.disabled = true;
+            boton.style.backgroundColor = "#90e0ef";
+ 
+ 
+            // API de frases célebres (en inglés, pero sirve para el ejemplo)
+            fetch('http://api.quotable.io/random')
+                .then(response => response.json())
+                .then(data => {
+
+                    // Actualizamos el diseño con los datos reales
+                    texto.innerHTML = `"${data.content}"`;
+                    document.getElementById("autor-frase").innerHTML = `- ${data.author}`;
+                    
+                    const colores = ["#7E3F35", "#343A40", "#1B4332", "#9A8478"];
+                    const colorRandom = colores[Math.floor(Math.random() * colores.length)];
+                    document.getElementById("autor-frase").style.color = colorRandom;
+
+                    texto.classList.add("fuente-elegante");
+
+                    // Restauramos el botón
+                    boton.innerHTML = "✨ Dame otra frase";
+                    boton.disabled = false;
+                    boton.style.backgroundColor = "#00273c";
+                    
+                })
+
+                .catch(error => {
+                    texto.innerHTML = "Hubo un error en la conexión.";
+
+                    document.getElementById("auto-frase").innerHTML = "";
+                    boton.innerHTML = "Intentar de nuevo";
+                    boton.disabled = false;
+                    boton.style.backgroundColor = "#d00000"
+
+                    texto.classList.remove("fuente-elegante");
+                });
+        }
+    </script>
+</body>
+</html>
+ 

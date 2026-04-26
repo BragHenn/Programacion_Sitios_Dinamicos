@@ -1,0 +1,81 @@
+:root {
+    --spy-green: #00ff41;
+    --spy-red: #ff3e3e;
+    --spy-bg: #0d1117;
+}
+
+body {
+    background: var(--spy-bg);
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid var(--spy-green);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
+    width: 320px;
+    position: relative;
+}
+
+.led {
+    width: 12px;
+    height: 12px;
+    background: #333;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    transition: 0.3s;
+}
+
+/* Clases dinámicas para el LED */
+.led-active { background: var(--spy-green); box-shadow: 0 0 10px var(--spy-green); }
+.led-error { background: var(--spy-red); box-shadow: 0 0 10px var(--spy-red); }
+
+h2 { font-size: 1rem; letter-spacing: 3px; margin: 0; }
+.id-tag { font-size: 0.7rem; color: #555; margin-bottom: 20px; }
+
+.display-area {
+    background: rgba(0,0,0,0.5);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.data-row { margin: 10px 0; }
+.label { font-size: 0.6rem; color: var(--spy-green); display: block; opacity: 0.7; }
+#lat, #lng { font-size: 1.4rem; font-weight: bold; }
+
+.status-msg {
+    font-size: 0.7rem;
+    margin-bottom: 20px;
+    height: 15px;
+}
+
+.error-text { color: var(--spy-red); font-weight: bold; }
+
+button {
+    background: transparent;
+    border: 1px solid var(--spy-green);
+    color: var(--spy-green);
+    padding: 12px 20px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+}
+
+button:hover {
+    background: var(--spy-green);
+    color: black;
+    box-shadow: 0 0 15px var(--spy-green);
+}
