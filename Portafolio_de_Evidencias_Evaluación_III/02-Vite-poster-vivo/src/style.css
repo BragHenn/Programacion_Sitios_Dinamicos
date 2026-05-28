@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;700&display=swap');
+
+body {
+  background-color: #0d0e12;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+ 
+
+h2 {
+  letter-spacing: 6px;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+
+.oculto {
+  display: none !important;
+}
+ 
+ 
+/* 🚨 EL RETO COMIENZA AQUÍ 🚨 */
+.contenedor-poster {
+  width: 400px;
+  height: 600px;
+  background-color: #333;
+  position: relative; /* Para que la capa de texto flote encima */
+  overflow: hidden;
+  border: 10px solid #ff00ff;
+  border-radius: 20px;  
+
+  box-shadow: 
+    0 5px 12px #fcb7fc;
+}
+ 
+ 
+#imagen-fondo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Evita que la foto se aplaste */
+}
+ 
+ 
+.capa-texto {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  padding: 25px;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+ 
+
+#texto-frase {
+  font-family: 'Montserrat', sans-serif; 
+  font-style: italic;
+  font-size: 25px;
+  line-height: 1.4;
+  margin: 0 0 15px 0;
+  color: #ffffff;
+  mix-blend-mode: difference;
+}
+
+
+#texto-autor {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #ff9eff; 
+  margin: 0;
+}
+
+
+button {
+  margin-top: 20px;
+  padding: 15px 30px;
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #0d0e12;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background-color: #ff00ff;
+  color: #0d0e12;
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px #fcb7fc;
+}
+
+button:active {
+  transform: scale(0.98);
+}
